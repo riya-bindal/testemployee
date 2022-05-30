@@ -1,42 +1,40 @@
 from django.shortcuts import render
 
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.generics import GenericAPIView,ListAPIView, CreateAPIView, UpdateAPIView, DestroyAPIView, RetrieveAPIView
 from rest_framework.response import Response
-
+from rest_framework.authentication import BasicAuthentication
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from .models import Employees
 from .serializers import EmployeeSerializer
 
 # Create your views here.
 
-class EmployeeListCreateView(ListCreateAPIView):
+class EmployeeCreateView(CreateAPIView):
     queryset = Employees.objects.all()
     serializer_class = EmployeeSerializer
+    authentication_classes = [BasicAuthentication]
+    permission_classes=[IsAdminUser]
 
-    # def list(self, request):
-    #     queryset = Employees.objects.all()
-    #     serializer = EmployeeSerializer(queryset, many=True)
-    #     return Response(serializer.data)
-
-class EmployeeDetailView(RetrieveUpdateDestroyAPIView):
+class EmployeeListView(ListAPIView):
     queryset = Employees.objects.all()
     serializer_class = EmployeeSerializer
+    authentication_classes = [BasicAuthentication]
+    permission_classes=[IsAuthenticated]
 
-    # def get(self, request):
-    #     queryset = self.get_queryset()
-    #     serializer = EmployeeSerializer(queryset, many=True)
-    #     return Response(serializer.data)
-    
-    # def put(self, request):
-    #     queryset = self.get_queryset()
-    #     serializer = EmployeeSerializer(queryset, many=True)
-    #     return Response(serializer.data)
-    
-    # def patch(self, request):
-    #     queryset = self.get_queryset()
-    #     serializer = EmployeeSerializer(queryset, many=True)
-    #     return Response(serializer.data)
-    
-    # def delete(self, request):
-    #     queryset = self.get_queryset()
-    #     serializer = EmployeeSerializer(queryset, many=True)
-    #     return Response(serializer.data)
+class EmployeeChangeView(UpdateAPIView):
+    queryset = Employees.objects.all()
+    serializer_class = EmployeeSerializer
+    authentication_classes = [BasicAuthentication]
+    permission_classes=[IsAdminUser]
+
+class EmployeeRetrieveView(RetrieveAPIView):
+    queryset = Employees.objects.all()
+    serializer_class = EmployeeSerializer
+    authentication_classes = [BasicAuthentication]
+    permission_classes=[IsAuthenticated]
+
+class EmployeeDeleteView(DestroyAPIView):
+    queryset = Employees.objects.all()
+    serializer_class = EmployeeSerializer
+    authentication_classes = [BasicAuthentication]
+    permission_classes=[IsAdminUser]
