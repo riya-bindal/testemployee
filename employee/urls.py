@@ -17,10 +17,13 @@ from django.contrib import admin
 from django.urls import path, include
 
 # import rest_framework
-from emp import views
+from emp.views import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include('emp.urls')),
+    path("accounts/", include("django.contrib.auth.urls")),
+
     
     path('emp_list/', views.EmployeeListView.as_view()),
     path('emp_create/', views.EmployeeCreateView.as_view()),

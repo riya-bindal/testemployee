@@ -4,8 +4,8 @@ from rest_framework.generics import GenericAPIView,ListAPIView, CreateAPIView, U
 from rest_framework.response import Response
 from rest_framework.authentication import BasicAuthentication
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
-from .models import Employees
-from .serializers import EmployeeSerializer
+from ..models import Employees
+from ..serializers import EmployeeSerializer
 
 # Create your views here.
 
