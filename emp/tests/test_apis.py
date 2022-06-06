@@ -25,6 +25,7 @@ class TestAPI(TestCase):
         response = self.c.get('/emp/')
         self.assertEquals(response.status_code, 200)
         self.assertEquals(response.data, get_employee_sample_output)
+        # self.assertEqual(len(response.context['employees']), 2)
 
 
     def TestGet(self):

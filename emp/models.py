@@ -24,6 +24,7 @@ class Employees(models.Model):
     date_of_joining = models.DateField()
     salary=models.DecimalField(max_digits=7, decimal_places=2)
     phone_number = models.CharField(max_length=17, blank=True)
+    role=models.ForeignKey(Role,on_delete=models.CASCADE)
 
     def __str__(self):
         return self.user.username
